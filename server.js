@@ -37,7 +37,7 @@ function gcd(a, b) {
   b= Math.abs(b);
   while (b !== 0) {
     const t = b;
-    b = a % b;
+    b = a %b;
     a= t;
   }
   return a;
@@ -45,7 +45,7 @@ function gcd(a, b) {
 
 function lcmTwo(a, b) {
   if (a=== 0 || b === 0) return 0;
-  return Math.abs(a * b) / gcd(a, b);
+  return Math.abs(a * b)/gcd(a, b);
 }
 
 function lcmOfArr(arr) {
@@ -79,7 +79,7 @@ async function askGemini(q) {
 
     const resp = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type':'application/json' },
       body: JSON.stringify({
         contents: [{ parts: [{ text: q }] }],
         generationConfig: {
@@ -108,8 +108,8 @@ app.get('/', (req, res) => {
 
 app.get('/api/health', (req, res) => {
   res.status(200).json({
-    is_success: true,
-    official_email: OFFICIAL_EMAIL
+    is_success:true,
+    official_email:OFFICIAL_EMAIL
   });
 });
 
@@ -131,7 +131,7 @@ app.post('/api/bfhl', async (req, res) => {
     });
   }
 
-  const k = keys[0];
+  const k =keys[0];
   const v= body[k];
   let data;
 
@@ -159,7 +159,7 @@ app.post('/api/bfhl', async (req, res) => {
 
   else if (k === 'lcm') {
     const out = lcmOfArr(v);
-    if (out === null) {
+    if (out=== null) {
       return res.status(400).json({
         is_success: false,
         error:'lcm must be a non-empty integer array'
@@ -169,7 +169,7 @@ app.post('/api/bfhl', async (req, res) => {
   }
 
   else if (k === 'hcf') {
-    const out = hcfOfArr(v);
+    const out =hcfOfArr(v);
     if (out=== null) {
       return res.status(400).json({
         is_success: false,
@@ -187,19 +187,19 @@ app.post('/api/bfhl', async (req, res) => {
         error:'AI service unavailable'
       });
     }
-    data = ans;
+    data =ans;
   }
 
   else {
     return res.status(400).json({
-      is_success: false,
-      error: 'Invalid key'
+      is_success:false,
+      error:'Invalid key'
     });
   }
 
   res.status(200).json({
-    is_success: true,
-    official_email: OFFICIAL_EMAIL,
+    is_success:true,
+    official_email:OFFICIAL_EMAIL,
     data
   });
 });
@@ -207,7 +207,7 @@ app.post('/api/bfhl', async (req, res) => {
 app.use((req, res) => {
   res.status(404).json({
     is_success: false,
-    error: 'Not found'
+    error:'Not found'
   });
 });
 
